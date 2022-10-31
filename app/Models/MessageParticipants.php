@@ -9,4 +9,9 @@ class MessageParticipants extends Model
 {
     use HasFactory;
     protected $table = 'group_participants';
+    protected $with = [ 'user' ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

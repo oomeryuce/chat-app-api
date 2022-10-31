@@ -33,12 +33,175 @@
                         ]
                     }
                 ]
-            }
-        },
-        "/users/register": {
-            "post": {
+            },
+            "put": {
                 "tags": [
                     "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name and Surname",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "User Name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bio",
+                        "in": "query",
+                        "description": "Users brief description",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "query",
+                        "description": "User avatar",
+                        "required": false,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Get user by user Id.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/@{username}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "Find user by username. Must use like '@<-username->'",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/search": {
+            "get": {
+                "tags": [
+                    "Search"
+                ],
+                "parameters": [
+                    {
+                        "name": "searchKey",
+                        "in": "query",
+                        "description": "Find users by key.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
                 ],
                 "parameters": [
                     {
@@ -103,10 +266,10 @@
                 }
             }
         },
-        "/users/login": {
+        "/login": {
             "post": {
                 "tags": [
-                    "Users"
+                    "Auth"
                 ],
                 "description": "You can login with email or username.",
                 "parameters": [
@@ -148,28 +311,100 @@
         "/users/logout": {
             "post": {
                 "tags": [
-                    "Users"
+                    "Auth"
                 ],
                 "responses": {
                     "200": {
                         "description": "An example resource"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/messages": {
+            "get": {
+                "tags": [
+                    "Messages"
+                ],
+                "description": "Get all message rooms.",
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/messages/create": {
+            "post": {
+                "tags": [
+                    "Messages"
+                ],
+                "description": "Send a message.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "isGroup": {
+                                        "description": "is this a group?",
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "name": {
+                                        "description": "If it is a group chat name it!",
+                                        "type": "string",
+                                        "example": "New Group Chat"
+                                    },
+                                    "to": {
+                                        "description": "Group participants ids",
+                                        "type": "array",
+                                        "items": {
+                                            "description": "User Ids",
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            ""
+                        ]
+                    }
+                ]
             }
         }
     },
     "components": {
         "securitySchemes": {
             "bearerAuth": {
-                "type": "oauth2",
+                "type": "http",
                 "description": "Use a global client_id / client_secret and your username / password combo to obtain a token",
+                "name": "Password Based",
                 "in": "header",
-                "flows": {
-                    "password": {
-                        "tokenUrl": "/oauth/token",
-                        "scopes": {}
-                    }
-                },
+                "bearerFormat": "JWT",
                 "scheme": "bearer"
             }
         }

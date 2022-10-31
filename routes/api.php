@@ -24,14 +24,18 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::prefix('users')->group(function () {
         Route::get('/me', [UserController::class, 'me']);
         Route::put('/me', [UserController::class, 'edit']);
+        Route::post('/me/password', [UserController::class, 'passwordReset']);
         Route::post('/logout', [UserController::class, 'logout']);
         Route::get('/@{username}', [UserController::class, 'getUserByUn']);
         Route::get('/{id}', [UserController::class, 'getUserById']);
     });
 
+    Route::post('search', [UserController::class, 'searchUser']);
+
     Route::prefix('messages')->group(function () {
         Route::get('/', [MessagesController::class, 'index']);
-        Route::post('/send', [MessagesController::class, 'create']);
+        Route::post('/create', [MessagesController::class, 'create']);
+        Route::post('/send', [MessagesController::class, 'sendMessage']);
         Route::get('/{id}', [MessagesController::class, 'getMessages']);
         Route::delete('/{id}', [MessagesController::class, 'deleteMessage']);
     });

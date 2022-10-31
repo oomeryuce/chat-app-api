@@ -15,6 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('room_id')->index()->constrained('rooms');
             $table->string('text')->nullable();
             $table->string('image')->nullable();

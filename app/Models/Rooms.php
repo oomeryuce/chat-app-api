@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Rooms extends Model
 {
     use HasFactory;
-    protected $with = [ 'participants' ];
+    // protected $with = [ 'participants' ];
 
     public function participants() {
-        return $this->belongsToMany(MessageParticipants::class);
+        return $this->hasMany(MessageParticipants::class, 'room_id');
     }
 }
