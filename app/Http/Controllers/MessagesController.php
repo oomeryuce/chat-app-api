@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
+use App\Events\RoomEvents;
 use App\Models\MessageParticipants;
 use App\Models\Messages;
 use App\Models\Rooms;
@@ -149,6 +151,9 @@ class MessagesController extends Controller
         $message->room_id = $roomId;
         $message->text = $text;
         $message->save();
+
+        $newMessage = Messages::with('user')->find($message->id);
+        broadcast(new RoomEvents($newMessage))->toOthers();
 
         return (new ApiController())->ApiCreator($message);
     }
