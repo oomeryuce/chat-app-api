@@ -155,7 +155,7 @@ class MessagesController extends Controller
         $newMessage = Messages::with('user')->find($message->id);
         broadcast(new RoomEvents($newMessage))->toOthers();
 
-        return (new ApiController())->ApiCreator($message);
+        return (new ApiController())->ApiCreator($newMessage);
     }
 
     /**
