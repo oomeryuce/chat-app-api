@@ -1,5 +1,5 @@
 {
-	"authHost": "http://localhost:8000",
+	"authHost": "https://api-uacs.gasome.com",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [],
 	"database": "redis",
@@ -22,5 +22,11 @@
 	"subscribers": {
 		"http": true,
 		"redis": true
-	}
+	},
+    "apiOriginAllow": {
+        "allowCors": true,
+        "allowOrigin": "",
+        "allowMethods": "GET, POST",
+        "allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
+    }
 }
