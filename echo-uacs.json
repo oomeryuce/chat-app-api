@@ -1,0 +1,5 @@
+{
+  "name": "echo-uacs",
+  "script": "laravel-echo-server",
+  "args": "start"
+}
