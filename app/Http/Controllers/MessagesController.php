@@ -48,6 +48,8 @@ class MessagesController extends Controller
         if (count($roomSecurity) === 0) {
             return (new ApiController())->ApiCreator('Busted!', true);
         }
+        // mark all messages with the selected contact as read
+        Messages::where('room_id', $id)->where('user_id', '!=', auth()->id())->update(['read' => true]);
         $messages = Messages::where('room_id', $id)->with('user')->orderBy('created_at','desc')->paginate(10);
         return (new ApiController())->ApiCreator($messages);
     }
