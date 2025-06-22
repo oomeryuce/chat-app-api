@@ -1,64 +1,174 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Web Chat Application Backend Project 3389
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a **full-stack backend application** developed as part of a thesis at University American College Skopje.  
+It is built with Laravel 8 and designed to handle real-time communication (via sockets) and robust database operations.  
+While this repository covers the backend and socket server, there is a separate repository for the web (frontend) application:
 
-## About Laravel
+👉 **Frontend repository:** [https://github.com/oomeryuce/chat-app-web](https://github.com/oomeryuce/chat-app-web)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* [Features](#features)
+* [Installation](#installation)
+* [Development](#development)
+* [Configuration](#configuration)
+* [Scripts](#scripts)
+* [Packages](#packages)
+* [License](#license)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* **Laravel 8 Framework**
+* **RESTful API Support**
+* **JWT & OAuth Authentication** (Sanctum, Passport)
+* **Real-time broadcasting (Laravel Echo & Echo Server)**
+* **Swagger/OpenAPI Documentation** (`l5-swagger`)
+* **Frontend:**
 
-## Laravel Sponsors
+  * Modern JS/CSS bundled with Laravel Mix
+  * Axios for easy API consumption
+  * Lodash & PostCSS integration
+* **Comprehensive Testing:** PHPUnit, Mockery, Faker
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+---
 
-### Premium Partners
+## Installation
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 1. Clone the Repository
 
-## Contributing
+```bash
+git clone oomeryuce/chat-app-api
+cd chat-app-api
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. Install PHP Dependencies
 
-## Code of Conduct
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Install Node.js Dependencies
 
-## Security Vulnerabilities
+```bash
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Create Environment File
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 5. Configure the Database
+
+Edit your `.env` file and update database credentials as needed.
+
+---
+
+## Development
+
+### Start the Development Server
+
+```bash
+php artisan serve
+```
+
+### Build Frontend Assets (Development)
+
+```bash
+npm run dev
+```
+
+### Watch Files Automatically
+
+```bash
+npm run watch
+```
+
+### Hot Reload
+
+```bash
+npm run hot
+```
+
+### Production Build
+
+```bash
+npm run prod
+```
+
+---
+
+## Configuration
+
+* **Swagger Documentation:**
+  Access auto-generated API docs at `/api/documentation`.
+  (Swagger settings: `config/l5-swagger.php`)
+
+* **Real-time Broadcasting:**
+  Use `laravel-echo-server` for websocket broadcasting.
+  For setup and configuration, check out the [Laravel Echo Server documentation](https://github.com/tlaverdure/laravel-echo-server).
+
+* **Authentication:**
+  API authentication can be handled via JWT, Passport, or Sanctum.
+
+---
+
+## Scripts
+
+**PHP Artisan**
+
+* `php artisan migrate` – Run database migrations
+* `php artisan db:seed` – Run seeders
+* `php artisan horizon` – Monitor queues
+
+**Composer**
+
+* `composer update` – Update PHP dependencies
+
+**NPM**
+
+* `npm run dev` – Development build
+* `npm run prod` – Production build
+* `npm run watch` – Watch file changes
+* `npm run hot` – Hot reload
+
+---
+
+## Main Packages Used
+
+* **Backend**
+
+  * `laravel/framework`
+  * `laravel/horizon`
+  * `laravel/passport`
+  * `laravel/sanctum`
+  * `darkaonline/l5-swagger`
+  * `fruitcake/laravel-cors`
+  * `guzzlehttp/guzzle`
+  * `predis/predis`
+* **Frontend**
+
+  * `laravel-mix`
+  * `axios`
+  * `lodash`
+  * `postcss`
+  * `laravel-echo-server`
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
+
+---
+
+## Contribution & Support
+
+Feel free to [open an issue](https://github.com//oomeryuce/chat-app-api) or submit a pull request.
+
+For questions, reach out at: oomeryuce@gmail.com
